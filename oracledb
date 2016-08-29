@@ -1,0 +1,46 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          skeleton
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Example initscript
+# Description:       This file should be used to construct scripts to be
+#                    placed in /etc/init.d.
+### END INIT INFO
+
+export ORACLE_BASE=/db/u01/app/oracle
+export ORACLE_HOME=/db/u01/app/oracle/product/11.2.0/dbhome_1
+export ORACLE_OWNR=oracle
+export PATH=$PATH:$ORACLE_HOME/bin
+
+NAME=oracledb
+SCRIPTNAME=/etc/init.d/$NAME
+
+case "$1" in
+  start)
+	echo -n "Starting Oracle: "
+	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/lsnrctl start"
+	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/dbstart $ORACLE_HOME"
+	touch /var/lock/oracle
+	echo "OK"
+	;;
+  stop)
+	echo -n "Shutdown Oracle: "
+	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/lsnrctl stop"
+	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/dbshut $ORACLE_HOME"
+	rm -f /var/lock/oracle
+	echo "OK"
+	;;
+  restart)
+	$SCRIPTNAME stop
+	$SCRIPTNAME start
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart}" >&2
+	exit 3
+	;;
+esac
+
+:
