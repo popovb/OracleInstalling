@@ -10,10 +10,10 @@
 #                    placed in /etc/init.d.
 ### END INIT INFO
 
-export ORACLE_BASE=/db/u01/app/oracle
-export ORACLE_HOME=/db/u01/app/oracle/product/11.2.0/dbhome_1
-export ORACLE_OWNR=oracle
-export PATH=$PATH:$ORACLE_HOME/bin
+ORACLE_BASE=/db
+ORACLE_HOME=$ORACLE_BASE/home
+ORACLE_BIN=$ORACLE_HOME/bin
+ORACLE_OWNR=oracle
 
 NAME=oracledb
 SCRIPTNAME=/etc/init.d/$NAME
@@ -21,15 +21,13 @@ SCRIPTNAME=/etc/init.d/$NAME
 case "$1" in
   start)
 	echo -n "Starting Oracle: "
-	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/lsnrctl start"
-	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/dbstart $ORACLE_HOME"
+	su $ORACLE_OWNR -c "$ORACLE_BIN/dbstart $ORACLE_HOME"
 	touch /var/lock/oracle
 	echo "OK"
 	;;
   stop)
 	echo -n "Shutdown Oracle: "
-	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/lsnrctl stop"
-	su $ORACLE_OWNR -c "$ORACLE_HOME/bin/dbshut $ORACLE_HOME"
+	su $ORACLE_OWNR -c "$ORACLE_BIN/dbshut $ORACLE_HOME"
 	rm -f /var/lock/oracle
 	echo "OK"
 	;;
