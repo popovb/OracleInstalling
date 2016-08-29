@@ -82,5 +82,5 @@ export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
 ## Автозапуск базы
 * `/etc/oratab` -> `orcl:/db/home:Y`
-* `oradb` поместить в `/etc/init.d/`
+* `oracledb` поместить в `/etc/init.d/`
 * `sudo update-rc.d defaults`
