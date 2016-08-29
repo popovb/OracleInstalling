@@ -23,7 +23,7 @@
 * `sudo groupadd -g 2001 oinstall`
 * `sudo groupadd -g 2002 dba`
 * `sudo groupadd -g 2003 oper`
-* `sudo adduser --uid 2004 --gid 2001 orcale`
+* `sudo adduser --uid 2004 --gid 2001 oracle`
 * `sudo usermod -a -G dba oracle`
 * `sudo usermod -a -G oper oracle`
 
@@ -58,20 +58,29 @@ export TMP=/tmp
 export TMPDIR=$TMP
  
 export ORACLE_HOSTNAME=host.domain
-export ORACLE_UNQNAME=oracledb
-export ORACLE_BASE=/u01/app/oracle
-export ORACLE_HOME=$ORACLE_BASE/product/12.1.0/db_1
-export ORACLE_SID=oracledb
+export ORACLE_UNQNAME=orcl
+export ORACLE_BASE=/db
+export ORACLE_HOME=$ORACLE_BASE/home
+export ORACLE_SID=orcl
  
-export PATH=/usr/sbin:$PATH
 export PATH=$ORACLE_HOME/bin:$PATH
  
-export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
 export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ```
+
+## Каталог базы
+* `sudo mkdir -p $ORACLE_HOME`
+* `sudo chown -R oracle:oinstall $ORACLE_HOME`
+
 ## Установка
 * `ssh -X oracle@host.domain`
 * Распаковываем архив.
 * `cd database`
 * `./runInstaller`
 * Следуем инструкциям.
+
+## Автозапуск базы
+* `/etc/oratab` -> `orcl:/db/home:Y`
+* `oradb` поместить в `/etc/init.d/`
+* `sudo update-rc.d defaults`
