@@ -70,4 +70,8 @@ export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
 export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ```
 ## Установка
-Распаовываем архив. `cd database; ./runInstaller`. Следуем инструкциям.
+* `ssh -X oracle@host.domain`
+* Распаковываем архив.
+* `cd database`
+* `./runInstaller`
+* Следуем инструкциям.
