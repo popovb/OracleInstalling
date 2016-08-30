@@ -1,6 +1,6 @@
 # Установка Oracle Databace 12c на Debian Jessie 8.5
 
-## Уставливаем Debian в экспетрном режиме
+## Уставливаем Debian в экспертном режиме
 
 `/tmp ~ 1 GB`.
 
