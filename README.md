@@ -4,11 +4,12 @@
 
 `/tmp ~ 1 GB`.
 
-1. ssh-сервер
-2. стандартные системные утилиты
-3. `sudo aptitude install build-essential`
-4. `sudo aptitude install libaio1`
-5. `sudo aptitude install x11-utils`
+* ssh-сервер
+* стандартные системные утилиты
+* `sudo aptitude install build-essential`
+* `sudo aptitude install libaio1`
+* `sudo aptitude install x11-utils`
+* `sudo aptitude install unzip`
 
 ## Делаем симлинки
 * `cd /bin`
@@ -83,4 +84,4 @@ export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ## Автозапуск базы
 * `/etc/oratab` -> `orcl:/db/home:Y`
 * `oracledb` поместить в `/etc/init.d/`
-* `sudo update-rc.d defaults`
+* `sudo update-rc.d oracledb defaults`
